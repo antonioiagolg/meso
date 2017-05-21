@@ -1,0 +1,30 @@
+{
+  "name": "meso",
+  "version": "1.0.0",
+  "description": "Sistema javascript que auxilia na medição de software através de contagem de pontos de função.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antonioiagolg/meso.git"
+  },
+  "keywords": [
+    "APF",
+    "medição",
+    "software"
+  ],
+  "author": "Antonio Iago Lemos Gaspar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antonioiagolg/meso/issues"
+  },
+  "homepage": "https://github.com/antonioiagolg/meso#readme",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-animate": "^1.5.5",
+    "angular-aria": "^1.5.5",
+    "angular-material": "^1.1.3"
+  }
+}
