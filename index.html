@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Meso - Medidor de Software</title>
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="node_modules/angular-material-data-table/dist/md-data-table.min.css">
+    <link rel="stylesheet" href="public/css/styles.css">
+</head>
+<body ng-app="mesoApp">
+    <main ng-cloak layout="column">
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                <h2 md-truncate>Meso - Medidor de software</h2>
+            </div>
+        </md-toolbar>
+        <md-content class="container-principal">
+            <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+            <md-tab label="requisitos">
+                <md-content class="md-padding" ng-controller="requisitosCtrl" layout="column">
+                    <h1 class="md-display-1">Entidades da análise do ponto de função</h1>
+                    <form name="requisitoForm">
+                        <div layout="row">
+                            <md-input-container flex="40" class="md-block" flex-gt-sm>
+                                <input ng-model="user.firstName" placeholder="Digite o requisito...">
+                            </md-input-container>
+                            <md-input-container flex="10" class="md-block" flex-gt-sm>
+                                <md-select ng-model="entidadeSelected">
+                                    <md-option ng-repeat="entidade in entidades" value="{{entidade}}">
+                                        {{entidade.valor}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex="25" class="md-block">
+                                <input type="number" placeholder="Digite a quantidade de dados..." step="any" name="rate" ng-model="project.rate"/>
+                            </md-input-container>
+                            <md-input-container flex="25" class="md-block">
+                                <input type="number" placeholder="Digite quantos AR/TR existem..." step="any" name="rate" ng-model="project.rate"/>
+                            </md-input-container>
+                        </div>
+                        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+                            <md-button class="md-raised">Adicionar requisito</md-button>
+                            <md-button class="md-raised md-primary">Calcular PF</md-button>
+                        </section>
+                    </form>
+                    <md-table-container>
+                        <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+                            <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+                            <tr md-row>
+                                <th md-column>Requisito</th>
+                                <th md-column md-numeric>Entidade</th>
+                                <th md-column md-numeric>Quantidade de dados</th>
+                                <th md-column md-numeric>AR/TR</th>
+                                <th md-column md-numeric>Grau</th>
+                                <th md-column md-numeric>Pontos de função</th>
+                            </tr>
+                            </thead>
+                            <tbody md-body>
+                            <tr md-row md-select="dessert" md-select-id="name" md-auto-select>
+                                <td md-cell>Apontamento</td>
+                                <td md-cell>ALI</td>
+                                <td md-cell>10</td>
+                                <td md-cell>1</td>
+                                <td md-cell>BAIXO</td>
+                                <td md-cell>3</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </md-table-container>
+                </md-content>
+            </md-tab>
+            <md-tab label="fator de ajuste">
+                <md-content class="md-padding">
+                <h1 class="md-display-2">Tab Two</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
+                <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
+                <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                </md-content>
+            </md-tab>
+            <md-tab label="configurações">
+                <md-content class="md-padding">
+                <h1 class="md-display-2">Tab Three</h1>
+                <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                </md-content>
+            </md-tab>
+            </md-tabs>
+        </md-content>
+    </main>
+
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.min.js"></script>
+    <script src="node_modules/angular-material/angular-material.min.js"></script>
+    <script src="node_modules/angular-material-data-table/dist/md-data-table.min.js"></script>
+    <script src="node_modules/angular-material-icons/angular-material-icons.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
