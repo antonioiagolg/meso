@@ -22,25 +22,25 @@
                     <form name="requisitoForm">
                         <div layout="row">
                             <md-input-container flex="40" class="md-block" flex-gt-sm>
-                                <input ng-model="user.firstName" placeholder="Digite o requisito...">
+                                <input ng-model="requisitoModel.nomeRequisito" placeholder="Digite o requisito...">
                             </md-input-container>
                             <md-input-container flex="10" class="md-block" flex-gt-sm>
-                                <md-select ng-model="entidadeSelected">
+                                <md-select ng-model="requisitoModel.entidade" ng-change="eventoMudarEntidade()">
                                     <md-option ng-repeat="entidade in entidades" value="{{entidade}}">
-                                        {{entidade.valor}}
+                                        {{entidade}}
                                     </md-option>
                                 </md-select>
                             </md-input-container>
                             <md-input-container flex="25" class="md-block">
-                                <input type="number" placeholder="Digite a quantidade de dados..." step="any" name="rate" ng-model="project.rate"/>
+                                <input type="number" placeholder="Digite a quantidade de dados..." step="any" name="rate" ng-model="requisitoModel.qtdDados"/>
                             </md-input-container>
                             <md-input-container flex="25" class="md-block">
-                                <input type="number" placeholder="Digite quantos AR/TR existem..." step="any" name="rate" ng-model="project.rate"/>
+                                <input type="number" placeholder="Digite quantos AR/TR existem..." step="any" name="rate" ng-model="requisitoModel.artr"/>
                             </md-input-container>
                         </div>
                         <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                            <md-button class="md-raised">Adicionar requisito</md-button>
-                            <md-button class="md-raised md-primary">Calcular PF</md-button>
+                            <md-button class="md-raised" ng-click="salvarRequisito()">Adicionar requisito</md-button>
+                            <md-button class="md-raised md-primary" ng-click="calcularPF()">Calcular PF</md-button>
                         </section>
                     </form>
                     <md-table-container>
@@ -56,13 +56,13 @@
                             </tr>
                             </thead>
                             <tbody md-body>
-                            <tr md-row md-select="dessert" md-select-id="name" md-auto-select>
-                                <td md-cell>Apontamento</td>
-                                <td md-cell>ALI</td>
-                                <td md-cell>10</td>
-                                <td md-cell>1</td>
-                                <td md-cell>BAIXO</td>
-                                <td md-cell>3</td>
+                            <tr md-row md-select="dessert" md-select-id="name" md-auto-select ng-repeat="requisito in requisitos">
+                                <td md-cell>{{requisito.nomeRequisito}}</td>
+                                <td md-cell>{{requisito.entidade}}</td>
+                                <td md-cell>{{requisito.qtdDados}}</td>
+                                <td md-cell>{{requisito.artr}}</td>
+                                <td md-cell>{{requisito.grau}}</td>
+                                <td md-cell>{{requisito.pontosFuncao}}</td>
                             </tr>
                             </tbody>
                         </table>
