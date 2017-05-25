@@ -52,7 +52,7 @@ app.service("ConfiguracoesService", ["ClassificadorEntidade", function(Classific
                 new ClassificadorEntidade(51,1000,2,5,"alto",15),
                 new ClassificadorEntidade(0,19,6,20,"medio",10),
                 new ClassificadorEntidade(20,50,6,20,"alto",15),
-                new ClassificadorEntidade(20,50,6,20,"alto",15)
+                new ClassificadorEntidade(51,1000,6,20,"alto",15)
             ],
         },
         AIE: {
