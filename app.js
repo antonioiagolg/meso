@@ -111,7 +111,19 @@ app.service("ConfiguracoesService", ["ClassificadorEntidade", function(Classific
 
 }]);
 
-app.controller("requisitosCtrl", ["$scope", "$mdToast", "ConfiguracoesService", function($scope, $mdToast, ConfiguracoesService) {
+app.service("PfService", function() {
+    var _qtdPontosFuncao = 0;
+
+    this.setPontosFuncao = function(pontosFuncao) {
+        _qtdPontosFuncao = pontosFuncao;
+    }
+
+    this.getPontosFuncao = function() {
+        return _qtdPontosFuncao;
+    }
+});
+
+app.controller("requisitosCtrl", ["$scope", "$mdToast", "ConfiguracoesService", "PfService", function($scope, $mdToast, ConfiguracoesService, PfService) {
 
     var limparRequisitoModel = function() {
         return {
@@ -156,10 +168,13 @@ app.controller("requisitosCtrl", ["$scope", "$mdToast", "ConfiguracoesService", 
             $scope.somaPF += $scope.requisitos[i].pontosFuncao;
         }
 
+        PfService.setPontosFuncao($scope.somaPF);
+
         $mdToast.show(
             $mdToast.simple()
             .textContent('Total de pontos: ' + $scope.somaPF)
-            .hideDelay(3000)
+            .position('top right')
+            .hideDelay(5000)
         );
     }
 
@@ -172,5 +187,38 @@ app.controller("requisitosCtrl", ["$scope", "$mdToast", "ConfiguracoesService", 
         }
 
         return ['não encontrado', 0];
+    }
+}]);
+
+app.controller("FatorAjusteCtrl", ["$scope", "PfService", "$mdToast", function($scope,PfService,$mdToast) {
+    $scope.fatorAj = {};
+    $scope.somatorioInfluencias = 0;
+    $scope.valorFatorAjuste = 0;
+    $scope.valorPfReajustado = 0;
+
+    $scope.calcularFatorAjuste = function() {
+        for(var key in $scope.fatorAj) {
+            if($scope.fatorAj.hasOwnProperty(key)) {
+                $scope.somatorioInfluencias += $scope.fatorAj[key];
+            }
+        }
+
+        $scope.valorFatorAjuste = ($scope.somatorioInfluencias * 0.01) + 0.65;
+        $scope.valorPfReajustado = $scope.valorFatorAjuste * PfService.getPontosFuncao();
+
+        $mdToast.show(
+            $mdToast.simple()
+            .textContent('Pontos reajustados: ' + $scope.valorPfReajustado.toFixed(2))
+            .position('top right')
+            .hideDelay(5000)
+        );
+
+        $scope.limpaVariaveis();
+    }
+
+    $scope.limpaVariaveis = function() {
+        $scope.somatorioInfluencias = 0;
+        $scope.valorFatorAjuste = 0;
+        $scope.valorPfReajustado = 0;
     }
 }]);
