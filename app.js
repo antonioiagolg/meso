@@ -142,6 +142,7 @@ app.controller("requisitosCtrl", ["$scope", "$mdToast", "$mdDialog", "Configurac
     $scope.requisitoModel = limparRequisitoModel();
     $scope.customFullscreen = false;
     $scope.somaPF = 0;
+    $scope.isEditar = false;
 
     $scope.salvarRequisito = function() {
         var classificacao = obterClassificacao($scope.requisitoModel);
@@ -180,21 +181,20 @@ app.controller("requisitosCtrl", ["$scope", "$mdToast", "$mdDialog", "Configurac
         );
     }
 
-    $scope.formEditarRequisito = function(ev) {
-        $mdDialog.show({
-            controller: DialogController,
-            templateUrl: 'public/partials/dialog-editar.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose:true,
-            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-        })
-        .then(function(answer) {
-            $scope.status = 'You said the information was "' + answer + '".';
-        }, function() {
-            $scope.status = 'You cancelled the dialog.';
-        });
+    $scope.formEditarRequisito = function(requisito) {
+       $scope.requisitoModel = requisito;
+       $scope.eventoMudarEntidade();
+       $scope.isEditar = true;
     };
+
+    $scope.editarRequisito = function() {
+        $scope.isEditar = false;
+        var classificacao = obterClassificacao($scope.requisitoModel);
+        $scope.requisitoModel.grau = classificacao[0];
+        $scope.requisitoModel.pontosFuncao = classificacao[1];
+
+        $scope.requisitoModel = limparRequisitoModel();
+    }
 
     var obterClassificacao = function(requisito) {
         var condicoes = requisito.condicoes;
@@ -205,20 +205,6 @@ app.controller("requisitosCtrl", ["$scope", "$mdToast", "$mdDialog", "Configurac
         }
 
         return ['não encontrado', 0];
-    }
-
-    function DialogController($scope, $mdDialog) {
-        $scope.hide = function() {
-            $mdDialog.hide();
-        };
-
-        $scope.cancelar = function() {
-            $mdDialog.cancel();
-        };
-
-        $scope.editarRequisito = function(requisito) {
-            $mdDialog.hide(requisito);
-        };
     }
 }]);
 
