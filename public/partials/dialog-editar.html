@@ -1,0 +1,45 @@
+<md-dialog aria-label="Editar requisito">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Editar requisito</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancelar()">
+          <md-icon aria-label="fechar">
+              <ng-md-icon icon="close" style="fill: white" size="24px"></ng-md-icon> 
+          </md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content layout="column" layout-padding>
+        <div layout="row" layout-margin>
+            <md-input-container flex="90" class="md-block" flex-gt-sm>
+                <input ng-model="requisitoModel.nomeRequisito" placeholder="Digite o requisito...">
+            </md-input-container>
+            <md-input-container flex="10" class="md-block" flex-gt-sm>
+            <md-select ng-model="requisitoModel.entidade" ng-change="eventoMudarEntidade()">
+                <md-option ng-repeat="entidade in entidades" value="{{entidade}}">
+                    {{entidade}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        </div>
+        <div layout="row" layout-margin>
+            <md-input-container flex="50" class="md-block">
+                <input type="number" placeholder="Digite a quantidade de dados..." step="any" name="rate" ng-model="requisitoModel.qtdDados"/>
+            </md-input-container>
+            <md-input-container flex="50" class="md-block">
+                <input type="number" placeholder="Digite quantos AR/TR existem..." step="any" name="rate" ng-model="requisitoModel.artr"/>
+            </md-input-container>
+        </div>
+        
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="editarRequisito(requisitoModel)">
+        Editar
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
