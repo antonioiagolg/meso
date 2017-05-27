@@ -1,4 +1,4 @@
-var app = angular.module("mesoApp", ["ngMaterial", "md.data.table", "ngMdIcons"]);
+var app = angular.module("mesoApp", ["ngMaterial", "md.data.table", "ngMdIcons", "ui.utils.masks"]);
 
 app.factory('ClassificadorEntidade', function() {
     function ClassificadorEntidade(tipoDadoMin,
