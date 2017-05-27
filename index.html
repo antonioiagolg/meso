@@ -53,16 +53,24 @@
                                 <th md-column md-numeric>AR/TR</th>
                                 <th md-column md-numeric>Grau</th>
                                 <th md-column md-numeric>Pontos de função</th>
+                                <th md-column>Editar</th>
                             </tr>
                             </thead>
                             <tbody md-body>
-                            <tr md-row md-select="dessert" md-select-id="name" md-auto-select ng-repeat="requisito in requisitos">
+                            <tr md-row md-select="dessert" md-select-id="name" md-auto-select ng-repeat="requisito in requisitos track by $index">
                                 <td md-cell>{{requisito.nomeRequisito}}</td>
                                 <td md-cell>{{requisito.entidade}}</td>
                                 <td md-cell>{{requisito.qtdDados}}</td>
                                 <td md-cell>{{requisito.artr}}</td>
                                 <td md-cell>{{requisito.grau}}</td>
                                 <td md-cell>{{requisito.pontosFuncao}}</td>
+                                <td md-cell>
+                                    <md-button class="md-fab md-mini" aria-label="editar" ng-click="editarRequisito()">
+                                        <md-icon layout-align="center center">
+                                            <ng-md-icon icon="mode_edit" style="fill: white" size="24px"></ng-md-icon> 
+                                        </md-icon>
+                                    </md-button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
