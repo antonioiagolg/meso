@@ -190,10 +190,13 @@ app.controller("requisitosCtrl", ["$scope", "$mdToast", "$mdDialog", "Configurac
     $scope.editarRequisito = function() {
         $scope.isEditar = false;
         var classificacao = obterClassificacao($scope.requisitoModel);
+
         $scope.requisitoModel.grau = classificacao[0];
         $scope.requisitoModel.pontosFuncao = classificacao[1];
 
         $scope.requisitoModel = limparRequisitoModel();
+
+        localStorage.setItem("requisitos", JSON.stringify($scope.requisitos));
     }
 
     var obterClassificacao = function(requisito) {
