@@ -138,7 +138,7 @@ app.controller("requisitosCtrl", ["$scope", "$mdToast", "ConfiguracoesService", 
     };
 
     $scope.entidades      = Object.keys(ConfiguracoesService.configEntidades);
-    $scope.requisitos     = [];
+    $scope.requisitos     = JSON.parse(localStorage.getItem("requisitos")) || [];
     $scope.requisitoModel = limparRequisitoModel();
 
     $scope.somaPF = 0;
@@ -156,6 +156,8 @@ app.controller("requisitosCtrl", ["$scope", "$mdToast", "ConfiguracoesService", 
         });
 
         $scope.requisitoModel = limparRequisitoModel();
+
+        localStorage.setItem("requisitos", JSON.stringify($scope.requisitos));
     }
 
     $scope.eventoMudarEntidade = function() {
