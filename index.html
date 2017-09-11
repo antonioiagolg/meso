@@ -41,6 +41,7 @@
                         <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
                             <md-button class="md-raised" ng-click="!isEditar ? salvarRequisito() : editarRequisito()">{{!isEditar ? 'Adicionar requisito' : 'Atualizar requisito'}}</md-button>
                             <md-button class="md-raised md-primary" ng-click="calcularPF()">Calcular PF</md-button>
+                            <md-button class="md-raised md-primary" ng-click="exportaCsv()">Exportar CSV</md-button>
                         </section>
                     </form>
                     <md-table-container>
