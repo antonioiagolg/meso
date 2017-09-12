@@ -238,6 +238,13 @@ app.controller("requisitosCtrl", ["$scope", "$mdToast", "$mdDialog", "Configurac
        $scope.isEditar = true;
     };
 
+    $scope.formExcluirRequisito = function(requisito) {
+        let index = $scope.requisitos.indexOf(requisito);
+
+        if(index < 0) return;
+        $scope.requisitos.splice(index, 1);
+    }
+
     $scope.editarRequisito = function() {
         $scope.isEditar = false;
         var classificacao = obterClassificacao($scope.requisitoModel);

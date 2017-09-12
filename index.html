@@ -55,6 +55,7 @@
                                 <th md-column md-numeric>Grau</th>
                                 <th md-column md-numeric>Pontos de função</th>
                                 <th md-column>Editar</th>
+                                <th md-column>Excluir</th>
                             </tr>
                             </thead>
                             <tbody md-body>
@@ -69,6 +70,13 @@
                                     <md-button class="md-fab md-mini" aria-label="editar" ng-click="formEditarRequisito(requisito)">
                                         <md-icon layout-align="center center">
                                             <ng-md-icon icon="mode_edit" style="fill: white" size="24px"></ng-md-icon> 
+                                        </md-icon>
+                                    </md-button>
+                                </td>
+                                <td md-cell>
+                                    <md-button class="md-fab md-mini" aria-label="excluir" ng-click="formExcluirRequisito(requisito)">
+                                        <md-icon layout-align="center center">
+                                            <ng-md-icon icon="delete" style="fill: white" size="24px"></ng-md-icon> 
                                         </md-icon>
                                     </md-button>
                                 </td>
